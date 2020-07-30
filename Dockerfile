@@ -1,6 +1,6 @@
 FROM rocker/verse:latest
 
-# install dependencies for virsorter
+# install dependencies for virfinder
 RUN Rscript -e "install.packages('gapminder', repos = 'http://cran.us.r-project.org')" && \
     Rscript -e "install.packages('glmnet', repos = 'http://cran.us.r-project.org')" && \ 
     Rscript -e "install.packages('Rcpp', repos = 'http://cran.us.r-project.org')" && \ 
@@ -9,7 +9,7 @@ install2.r --error BiocManager \
     && Rscript -e 'requireNamespace("BiocManager"); BiocManager::install(c("qvalue"));' \
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-RUN apt-get update && apt-get install -y git && git clone https://github.com/jessieren/VirFinder.git
+RUN apt-get update && apt-get install -y procps git && git clone https://github.com/jessieren/VirFinder.git
 RUN R CMD INSTALL /VirFinder/linux/VirFinder_1.1.tar.gz
 
 
